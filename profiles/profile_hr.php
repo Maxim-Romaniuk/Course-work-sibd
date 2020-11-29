@@ -2,10 +2,6 @@
 session_start();
 ?>
 
-<?php if(!isset($_SESSION['user']) || empty($_SESSION['user']) ){
-    header('Location: ../index.php', true);
-}
-?>
 
 <!DOCTYPE HTML>
 <html lang="ru">
@@ -19,6 +15,14 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <body>
+<?php if(!isset($_SESSION['user']) || empty($_SESSION['user'])):
+    echo("<h1 align='center'>Ошибка! Неоходимо авторизоваться<br>Через 5 секунд произойдет переадресация на страницу входа</h1>
+          <meta http-equiv='refresh' content='5; url=../index.php'>");
+elseif($_SESSION['user']['lvl']!=5):
+    echo("<h1 align='center'>Ошибка! У вас нет прав для просмотра данной страницы<br>Через 5 секунд произойдет переадресация в ваш профиль</h1>
+          <meta http-equiv='refresh' content='5; url=../profile.php'>");
+    ?>
+<?php else: ?>
 <form>
     <h1 align="center">Добро пожаловать, <?=$_SESSION['user']['login']?>! </h1>
     <h2 align="center">Ваш ID пользователя: <?=$_SESSION['user']['id']?> </h2>
@@ -26,6 +30,6 @@ session_start();
     <a href="../vendor/logout.php" class="logout">Выход</a>
 </form>
 
-</p>
+<?php endif; ?>
 </body>
 </html>
