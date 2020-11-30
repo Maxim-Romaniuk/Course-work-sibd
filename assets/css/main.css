@@ -25,7 +25,11 @@ input{
     border: unset;
     border-bottom: 2px solid #e3e3e3;
     outline: none;
+    font-family: 'Roboto', sans-serif;
+}
 
+input:focus{
+    border-bottom: 2px solid #bebebe;
 }
 
 .button{
@@ -39,6 +43,9 @@ input{
     cursor: pointer;
     outline: none;
 
+}
+.button:hover{
+    background: #bebebe;
 }
 
 
@@ -79,3 +86,12 @@ textarea {
     resize: none;
     outline: none;
 }
+
+textarea:focus {
+    border: 2px solid #bebebe;
+}
+
+.center{
+    text-align: center;
+}
+
