@@ -14,6 +14,7 @@
 <?php if(isset($_SESSION['user'])): ?>
     <meta http-equiv='refresh' content='0; url=profile.php'>
 <?php else: ?>
+<div class="form">
     <form action="vendor/signin.php" method="POST">
         <label for="login">Логин</label>
         <input type="text" placeholder="Введите логин" name="login" id="login" required>
@@ -29,7 +30,7 @@
         ?>
         <p class="forgot">Забыли пароль? <a class="call_admin" href="forgot.php">Связаться с администратором</a></p>
     </form>
-
+</div>
 <?php endif; ?>
 </body>
 </html>

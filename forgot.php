@@ -10,10 +10,12 @@
     <link rel="icon" type="image/ico" href="favicon.ico">
 </head>
 <body>
+<div class="wrapper">
 <!-- Форма авторизации -->
 <?php if(isset($_SESSION['user'])): ?>
-    <meta http-equiv='refresh' content='0; url=profiles/profile.php'>
+    <meta http-equiv='refresh' content='0; url=profile.php'>
 <?php else: ?>
+    <div class="form">
     <form action="vendor/mail.php" method="POST">
         <h2 class="call_admin" >Связь с администратором</h2>
         <!-- Hidden Required Fields -->
@@ -37,7 +39,8 @@
 
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="assets/js/script.js"></script>
-
+    </div>
 <?php endif; ?>
+</div>
 </body>
 </html>

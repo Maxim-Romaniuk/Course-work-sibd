@@ -16,15 +16,6 @@ if (mysqli_num_rows($check_user) > 0) {
         "lvl" => $user['lvl'],
     ];
     header('Location: ../profile.php', true);
-//    if ($_SESSION['user']['lvl']==9){
-//        header('Location: ../profiles/profile_admin.php', true);
-//    } else if($_SESSION['user']['lvl']==5){
-//        header('Location: ../profiles/profile_hr.php', true);
-//    } else if($_SESSION['user']['lvl']==1){
-//        header('Location: ../profiles/profile_chief.php', true);
-//    } else{
-//        header('Location: ../profiles/profile_unknown.php', true);
-//    }
 
 } else {
     $_SESSION['message'] = 'Не верный логин или пароль';

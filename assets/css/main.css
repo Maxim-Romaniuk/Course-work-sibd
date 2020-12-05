@@ -1,17 +1,26 @@
 *{
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
     box-sizing: border-box;
 }
-
+html{
+    height: 100%;
+}
 body {
     font-family: 'Roboto', sans-serif;
+    height: 100%;
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    /*height: 100vh;*/
+}
+
+.form{
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
 }
-
 form{
     display: flex;
     flex-direction: column;
@@ -20,6 +29,16 @@ form{
 }
 
 input{
+    margin: 0px 0;
+    padding: 5px;
+    border: unset;
+    border-bottom: 2px solid #e3e3e3;
+    outline: none;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 15px;
+}
+
+select{
     margin: 5px 0;
     padding: 5px;
     border: unset;
@@ -30,6 +49,9 @@ input{
 
 input:focus{
     border-bottom: 2px solid #bebebe;
+}
+input:read-only{
+    background: #efefef;
 }
 
 .button{
@@ -55,6 +77,8 @@ input:focus{
     padding: 10px;
     text-align: center;
     font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .logout {
@@ -85,6 +109,11 @@ textarea {
     border: 2px solid #e3e3e3;
     resize: none;
     outline: none;
+    font-family: 'Roboto', sans-serif;
+}
+
+label{
+   margin: 0;
 }
 
 textarea:focus {
@@ -95,3 +124,134 @@ textarea:focus {
     text-align: center;
 }
 
+table{
+    min-width: 800px;
+    max-width: 1200px;
+    text-align: center;
+    border: 2px solid black;
+    padding: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: table;
+}
+
+td,th{
+    border: 2px solid #bebebe;
+    padding: 3px;
+}
+tr:nth-child(odd) { background-color: #ececec; }
+
+.wrapper{
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+
+}
+
+/*Меню*/
+
+.dws-menu *{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    margin-top: 0;
+    width: 100%;
+    background: #ececec;
+    margin-bottom: 60px;
+    flex: 0 0 auto;
+}
+
+.main-content {
+    flex: 1 0 auto;
+}
+
+footer{
+    margin-bottom: 0;
+    width: 100%;
+    background: #ececec;
+    flex: 0 0 auto;
+    height: 50px;
+    margin-top: 50px;
+}
+
+.dws-menu ul, .dws-menu ol{
+list-style: none;
+}
+
+.dws-menu > ul{
+    display: flex;
+    justify-content: center;
+}
+
+.dws-menu > ul li a {
+    display: block;
+    background: #ececec;
+    padding: 15px 30px 15px 40px;
+    color: black;
+    text-decoration: none;
+    transition: all 0.5s ease;
+}
+
+.dws-menu > li{
+    position: relative;
+}
+
+.dws-menu > ul li:first-child{
+    border-left: 2px solid #bebebe;
+}
+
+.dws-menu > ul li:last-child{
+    border-right: 2px solid #bebebe;
+}
+
+.dws-menu > ul li{
+    border-right: 1px solid #bebebe;
+}
+
+.dws-menu li a:hover{
+    background: #bebebe;
+    transition: all 0.5s ease;
+}
+
+/*Подменю*/
+
+.dws-menu li ul{
+    position: absolute;
+    min-width: 180px;
+    display: none;
+}
+
+.dws-menu li:hover > ul{
+    display: block;
+}
+
+.dws-menu li>ul li{
+    border: 1px solid #bebebe;
+    height: 50px;
+}
+.dws-menu li>ul li a{
+    padding: 15px;
+    text-transform: none;
+    background: #dedede;
+    height: 100%;
+}
+
+.left{
+    display: flex;
+    align-items: normal;
+}
+td a{
+    text-decoration: none;
+    color: #585858;
+    display: block;
+    transition: all 0.5s ease;
+}
+td a:hover{
+    color: #000000;
+    background: #bebebe;
+    transition: all 0.5s ease;
+}
