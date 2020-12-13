@@ -50,9 +50,9 @@ $levels = mysqli_query($connect,"SELECT lvl, lvl_name FROM  levels");
         <form action="../../vendor/create_user.php" method="post">
             <label for="user_login">Логин *</label>
             <input type="text" placeholder="Введите логин" name="user_login" id="user_login" autocomplete="off" required>
-            <label for="user_password">Новый пароль</label>
-            <input type="password" placeholder="Введите новый пароль" name="user_password" id="user_password" autocomplete="off" required>
-            <label for="user_lvl">Уровень доступа:</label>
+            <label for="user_password">Пароль *</label>
+            <input type="password" placeholder="Введите пароль" name="user_password" id="user_password" autocomplete="off" required>
+            <label for="user_lvl">Уровень доступа *</label>
             <select id="user_lvl" name="user_lvl" required>
                 <?php
                 while($lvl=mysqli_fetch_assoc($levels)){ ?>

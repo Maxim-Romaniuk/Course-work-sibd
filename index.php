@@ -17,7 +17,15 @@
 <div class="form">
     <form action="vendor/signin.php" method="POST">
         <label for="login">Логин</label>
-        <input type="text" placeholder="Введите логин" name="login" id="login" required>
+        <?php
+        if ($_SESSION['login']) : ?>
+            <input type="text" placeholder="Введите логин" name="login" id="login" value=<?= $_SESSION["login"] ?> required>
+        <?php else: ?>
+            <input type="text" placeholder="Введите логин" name="login" id="login" required>
+        <?php endif;
+        unset($_SESSION['login']);
+        ?>
+
         <label for="password">Пароль</label>
         <input type="password" placeholder="Введите пароль" name="password" id="password" required>
         <button class="button" type="submit">Войти</button>

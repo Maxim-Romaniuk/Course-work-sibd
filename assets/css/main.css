@@ -196,6 +196,12 @@ list-style: none;
     transition: all 0.5s ease;
 }
 
+.dws-menu li>ul li ul{
+    position: relative;
+    right: -285px;
+    top: -50px
+}
+
 .dws-menu > li{
     position: relative;
 }
@@ -254,4 +260,17 @@ td a:hover{
     color: #000000;
     background: #bebebe;
     transition: all 0.5s ease;
+}
+
+section p{
+    margin-bottom: 5px;
+}
+
+h3{
+    margin-top: 10px;
+    font-size: 16pt;
+}
+
+.line{
+    width:100%; border-top:2px solid #cbcbcb; padding-left:10px
 }

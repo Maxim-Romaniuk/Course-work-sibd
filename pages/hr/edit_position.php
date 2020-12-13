@@ -1,25 +1,17 @@
 <?php
 header("Content-Type:text/html;charset=UTF-8");
 //подключаем файл конфигурации
-require_once 'vendor/connect.php';
-include 'vendor/db_print.php';
-//$connect=mysqli_connect('localhost', 'login_php', 'Klu3uiop!', 'personnel_department');
-//if (!$connect) {
-// die('Error connect to DataBase with logins');
-//}
-$query = "select worker_id, concat_ws(' ',surname, name, patronymic) as fio, birthday, position_name, department_name
-from worker inner join work_history 
-using(worker_id) inner join staff_list using(staff_list_id) inner join position 
-using(position_id) inner join department using(department_id) ORDER BY worker_id";
-$result = mysqli_query($connect,$query);
-
+require_once '../../vendor/connect.php';
+include '../../vendor/db_print.php';
+$id=$_GET['id'];
+$pos_info = mysqli_fetch_assoc(mysqli_query($connect,"SELECT * FROM position where position_id='$id'"));
 ?>
 <!DOCTYPE HTML>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Профиль</title>
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -67,53 +59,45 @@ $result = mysqli_query($connect,$query);
 
                 <li><a href="#"><i class="fa fa-"></i>Профиль</a>
                     <ul>
-                        <li><a href="../vendor/logout.php" class="logout">Выход</a></li>
+                        <li><a href="../../vendor/logout.php" class="logout">Выход</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
     </header>
     <section class="main-content">
-        <h1 style="margin-bottom: 20px;" >Список работников в базе</h1>
-        <?php
-        if ($_SESSION['create_msg']) {
-            echo '<p class="msg"> ' . $_SESSION['create_msg'] . ' </p>';
-        }
-        unset($_SESSION['create_msg']);
-        ?>
-        <h3 style="float: left">Поиск:</h3><input style="position: relative; top:-1px; width: 300px" type="text" placeholder="ФИО, дата рождения, отдел, должность" id="search-text" onkeyup="tableSearch()">
-        <table id="info-table">
-            <tr> <th width="300px">ФИО</th><th width="150px">Дата рождения</th> <th width="300px">Отдел</th> <th width="300px">Должность</th> <th>Подробнее</th></tr>
+        <h1 style="margin-bottom: 20px;" >Редактирование должности</h1>
+        <form action="../../vendor/edit_pos.php" method="post">
+            <label for="pos_id">ID должности (нельзя изменять)</label>
+            <input   type="text" name="pos_id" id="pos_id" autocomplete="off" required value="<?=$id?>" readonly>
+            <label for="pos_name">Название должности *</label>
+            <input  type="text" placeholder="Введите название должности" name="pos_name" id="pos_name" autocomplete="off" value="<?=$pos_info["position_name"]?>" required>
+
+            <button style="margin-top: 25px" class="button" type="submit">Сохранить</button>
+
+        </form>
+        <form action="../../vendor/delete_pos.php" method="post">
+            <input hidden required value="<?=$id?>" name="pos_id_del" id="pos_id_del">
+            <button style="margin-top: 25px; background: #bc524c" class="button" type="submit" onclick="return del();">Удалить должность</button>
             <?php
-            while($worker=mysqli_fetch_assoc($result)){ ?>
-                <tr> <td width="300px"><?=$worker['fio']?></td> <td width="150px"><?=date("d.m.Y",strtotime($worker['birthday']))?></td> <td width="300px"><?= mb_ucfirst($worker['department_name'])?></td> <td width="300px"><?= mb_ucfirst($worker['position_name'])?></td> <td><a href="pages/hr/view_worker_profile.php?id=<?= $worker['worker_id']?>">Подробнее</a></td></tr>
-                <?php
+            if ($_SESSION['upd_msg']) {
+                echo '<p class="msg"> ' . $_SESSION['upd_msg'] . ' </p>';
             }
+            unset($_SESSION['upd_msg']);
             ?>
-        </table>
+</form>
     </section>
     <footer>
         <p style="text-align: center; padding-top: 15px ">СиБД. Романюк Максим. 2020</p>
     </footer>
 </div>
-<script>function tableSearch() {
-        var phrase = document.getElementById('search-text');
-        var table = document.getElementById('info-table');
-        var regPhrase = new RegExp(phrase.value, 'i');
-        var flag = false;
-        for (var i = 1; i < table.rows.length; i++) {
-            flag = false;
-            for (var j = 0; j <= table.rows[i].cells.length - 2; j++) {
-                flag = regPhrase.test(table.rows[i].cells[j].innerHTML);
-                if (flag) break;
-            }
-            if (flag) {
-                table.rows[i].style.display = "";
-            } else {
-                table.rows[i].style.display = "none";
-            }
-
-        }
-    }</script>
+<script type="text/javascript">
+    function del()
+    {
+        if (confirm("Bы уверены, что хотите удалить эту должность?"))
+            return true;
+        else return false;
+    }
+</script>
 </body>
 </html>
