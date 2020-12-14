@@ -63,7 +63,6 @@ $result = mysqli_query($connect,$query);
                         <li><a href="#">Список работающих пенсионеров</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Расширенный поиск</a></li>
 
                 <li><a href="#"><i class="fa fa-"></i>Профиль</a>
                     <ul>

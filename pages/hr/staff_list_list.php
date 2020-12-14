@@ -3,13 +3,12 @@ header("Content-Type:text/html;charset=UTF-8");
 //подключаем файл конфигурации
 require_once '../../vendor/connect.php';
 include '../../vendor/db_print.php';
-//$connect=mysqli_connect('localhost', 'login_php', 'Klu3uiop!', 'personnel_department');
-//if (!$connect) {
-// die('Error connect to DataBase with logins');
-//}
-$result = mysqli_query($connect,"SELECT specialty_code, specialty_name FROM specialty ORDER BY specialty_code");
+
+$result = mysqli_query($connect,"SELECT staff_list_id, department_name, position_name, number_of_staff_units, salary, bonus FROM  staff_list inner join position using (position_id) inner join department using (department_id)");
+
 
 ?>
+
 <!DOCTYPE HTML>
 <html lang="ru">
 <head>
@@ -69,19 +68,19 @@ $result = mysqli_query($connect,"SELECT specialty_code, specialty_name FROM spec
         </nav>
     </header>
     <section class="main-content">
-        <h1 style="margin-bottom: 20px;" >Список специальностей по ОКРБ</h1>
+        <h1 style="margin-bottom: 20px;" >Штатное расписание</h1>
         <?php
         if ($_SESSION['add_spec_msg']) {
             echo '<p class="msg"> ' . $_SESSION['add_spec_msg'] . ' </p>';
         }
         unset($_SESSION['add_spec_msg']);
         ?>
-        <h3 style="float: left">Поиск:</h3><input style="position: relative; top:-1px; width: 300px" type="text" placeholder="Код специальности или название" id="search-text" onkeyup="tableSearch()">
+        <h3 style="float: left">Поиск:</h3><input style="position: relative; top:+11px; width: 200px" type="text" placeholder="ID или название должности, название отдела" id="search-text" onkeyup="tableSearch()">
         <table id="spec-table">
-            <tr> <th width="100px">Код специальности</th> <th width="900x">Название специальности</th></tr>
+            <tr> <th width="50px">ID</th> <th width="300px">Отдел</th> <th width="300px">Должность</th> <th width="100px">Количество ставок</th> <th width="100px">Зарплата</th> <th width="100px">Премия</th> <th width="100px">Редактировать</th> </tr>
             <?php
-            while($spec=mysqli_fetch_assoc($result)){ ?>
-                <tr> <td width="200px"><?= $spec['specialty_code']?></td> <td width="900px"><?= $spec['specialty_name']?></td></tr>
+            while($pos=mysqli_fetch_assoc($result)){ ?>
+                <tr> <td width="50px"><?= $pos['staff_list_id']?></td> <td width="300px"><?= $pos['department_name']?></td> <td width="300px"><?= $pos['position_name']?></td> <td width="100px"><?= $pos['number_of_staff_units']?></td> <td width="100px"><?= $pos['salary']?></td> <td width="100px"><?= $pos['bonus']?></td> <td><a href="edit_staff_list.php?id=<?=$pos['staff_list_id']?>">Редактировать</a></td></tr>
                 <?php
             }
             ?>
@@ -111,4 +110,5 @@ $result = mysqli_query($connect,"SELECT specialty_code, specialty_name FROM spec
         }
     }</script>
 </body>
+
 </html>

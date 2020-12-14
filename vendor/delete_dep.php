@@ -5,7 +5,7 @@ require_once 'connect.php';
 
 $dep_id= $_POST['dep_id_del'];
 
-if(mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM personnel_department.staff_list where department_id=$dep_id"))>1):
+if(mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM personnel_department.staff_list where department_id=$dep_id"))>0):
         $_SESSION['upd_msg'] = 'Отдел связан со штатным расписанием. Ошибка!';?>
     <meta http-equiv="refresh" content="0; url=<?= $_SERVER["HTTP_REFERER"] ?>">
 <?php else:

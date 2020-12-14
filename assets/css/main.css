@@ -274,3 +274,33 @@ h3{
 .line{
     width:100%; border-top:2px solid #cbcbcb; padding-left:10px
 }
+
+@media print {
+    header {
+        display: none !important;
+    }
+    footer{
+        display: none !important;
+    }
+    h3{
+        display: none !important;
+
+    }
+    input{
+        display: none !important;
+    }
+    tr{
+        page-break-inside: avoid;
+    }
+    td,th{
+        border: 2px solid black;
+    }
+
+    @page {size:landscape;
+        margin: 10mm 10mm 10mm 20mm;
+    }
+}
+
+#search-text{
+    top:+11px !important;
+}

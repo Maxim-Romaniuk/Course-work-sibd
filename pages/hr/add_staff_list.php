@@ -3,12 +3,8 @@ header("Content-Type:text/html;charset=UTF-8");
 //подключаем файл конфигурации
 require_once '../../vendor/connect.php';
 include '../../vendor/db_print.php';
-//$connect=mysqli_connect('localhost', 'login_php', 'Klu3uiop!', 'personnel_department');
-//if (!$connect) {
-// die('Error connect to DataBase with logins');
-//}
-$result = mysqli_query($connect,"SELECT specialty_code, specialty_name FROM specialty ORDER BY specialty_code");
-
+$position = mysqli_query($connect, "SELECT * FROM position");
+$department = mysqli_query($connect, "SELECT * FROM department");
 ?>
 <!DOCTYPE HTML>
 <html lang="ru">
@@ -69,46 +65,41 @@ $result = mysqli_query($connect,"SELECT specialty_code, specialty_name FROM spec
         </nav>
     </header>
     <section class="main-content">
-        <h1 style="margin-bottom: 20px;" >Список специальностей по ОКРБ</h1>
+        <h1 style="margin-bottom: 20px;" >Добавление новой штатной единицы</h1>
         <?php
         if ($_SESSION['add_spec_msg']) {
             echo '<p class="msg"> ' . $_SESSION['add_spec_msg'] . ' </p>';
         }
         unset($_SESSION['add_spec_msg']);
         ?>
-        <h3 style="float: left">Поиск:</h3><input style="position: relative; top:-1px; width: 300px" type="text" placeholder="Код специальности или название" id="search-text" onkeyup="tableSearch()">
-        <table id="spec-table">
-            <tr> <th width="100px">Код специальности</th> <th width="900x">Название специальности</th></tr>
-            <?php
-            while($spec=mysqli_fetch_assoc($result)){ ?>
-                <tr> <td width="200px"><?= $spec['specialty_code']?></td> <td width="900px"><?= $spec['specialty_name']?></td></tr>
+        <form action="../../vendor/add_s_l.php" method="post">
+            <label for="pos_id">Название должности *</label>
+            <select id="pos_id" name="pos_id" required>
                 <?php
-            }
-            ?>
-        </table>
+                while($pos=mysqli_fetch_assoc($position)){ ?>
+                        <option value='<?=$pos["position_id"];?>'><?=$pos["position_name"];?></option>
+                    <?php } ?>
+            </select>
+            <label for="dep_id">Название отдела *</label>
+            <select id="dep_id" name="dep_id" required>
+                <?php
+                while($dep=mysqli_fetch_assoc($department)){ ?>
+                        <option selected value='<?=$dep["department_id"];?>'><?=$dep["department_name"];?></option>
+                    <?php } ?>
+            </select>
+            <label for="n_staff_units">Количество ставок *</label>
+            <input  type="text" placeholder="Введите количество ставок" name="n_staff_units" id="n_staff_units" autocomplete="off" value="<?=$staff_list_info["number_of_staff_units"]?>" required>
+            <label for="salary">Зарплата *</label>
+            <input  type="text" placeholder="Введите размер зарплаты" name="salary" id="salary" autocomplete="off" value="<?=$staff_list_info["salary"]?>" required>
+            <label for="bonus">Премия *</label>
+            <input  type="text" placeholder="Введите размер премии" name="bonus" id="bonus" autocomplete="off" value="<?=$staff_list_info["bonus"]?>" required>
+
+            <button style="margin-top: 25px" class="button" type="submit">Добавить штатную единицу</button>
+        </form>
     </section>
     <footer>
         <p style="text-align: center; padding-top: 15px ">СиБД. Романюк Максим. 2020</p>
     </footer>
 </div>
-<script>function tableSearch() {
-        var phrase = document.getElementById('search-text');
-        var table = document.getElementById('spec-table');
-        var regPhrase = new RegExp(phrase.value, 'i');
-        var flag = false;
-        for (var i = 1; i < table.rows.length; i++) {
-            flag = false;
-            for (var j = 0; j <= table.rows[i].cells.length - 1; j++) {
-                flag = regPhrase.test(table.rows[i].cells[j].innerHTML);
-                if (flag) break;
-            }
-            if (flag) {
-                table.rows[i].style.display = "";
-            } else {
-                table.rows[i].style.display = "none";
-            }
-
-        }
-    }</script>
 </body>
 </html>

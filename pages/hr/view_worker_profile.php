@@ -61,7 +61,6 @@ $edu = mysqli_query($connect,"SELECT document_id,document_type,year_of_graduatio
                         <li><a href="#">Список работающих пенсионеров</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Расширенный поиск</a></li>
 
                 <li><a href="#"><i class="fa fa-"></i>Профиль</a>
                     <ul>
@@ -74,6 +73,12 @@ $edu = mysqli_query($connect,"SELECT document_id,document_type,year_of_graduatio
     <section class="main-content" style="min-width: 1100px">
         <h1 style="margin-bottom: 10px;" >Подробная информация о работнике:</h1>
         <h2 style="margin-bottom: 20px;" ><?=$worker_info['inits']?> (ID:<?=$worker_info['worker_id']?>) <a href="edit_worker_profile.php?id=<?=$worker_id?>" style="text-decoration: none; color: #050f88">Редактировать данные</a></h2>
+        <?php
+        if ($_SESSION['add_spec_msg']) {
+            echo '<p class="msg"> ' . $_SESSION['add_spec_msg'] . ' </p>';
+        }
+        unset($_SESSION['add_spec_msg']);
+        ?>
         <h3 style= "margin-bottom: 10px;">Личная информация</h3>
         <p style="margin-bottom: 5px"><b>ФИО: </b> <?=$worker_info['fio']?> </p>
         <p style="margin-bottom: 5px"><b>Дата рождения: </b><?=date("d.m.Y",strtotime($worker_info['birthday']))?> (<?=$worker_age["age"]?> лет)</p>

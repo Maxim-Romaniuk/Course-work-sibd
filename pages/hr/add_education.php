@@ -3,12 +3,8 @@ header("Content-Type:text/html;charset=UTF-8");
 //подключаем файл конфигурации
 require_once '../../vendor/connect.php';
 include '../../vendor/db_print.php';
-//$connect=mysqli_connect('localhost', 'login_php', 'Klu3uiop!', 'personnel_department');
-//if (!$connect) {
-// die('Error connect to DataBase with logins');
-//}
-$result = mysqli_query($connect,"SELECT specialty_code, specialty_name FROM specialty ORDER BY specialty_code");
-
+$worker_id=$_GET['id'];
+$specialty = mysqli_query($connect, "SELECT * FROM specialty");
 ?>
 <!DOCTYPE HTML>
 <html lang="ru">
@@ -69,46 +65,48 @@ $result = mysqli_query($connect,"SELECT specialty_code, specialty_name FROM spec
         </nav>
     </header>
     <section class="main-content">
-        <h1 style="margin-bottom: 20px;" >Список специальностей по ОКРБ</h1>
+        <h1 style="margin-bottom: 20px;">Добавление документа об образовании</h1>
         <?php
         if ($_SESSION['add_spec_msg']) {
             echo '<p class="msg"> ' . $_SESSION['add_spec_msg'] . ' </p>';
         }
         unset($_SESSION['add_spec_msg']);
         ?>
-        <h3 style="float: left">Поиск:</h3><input style="position: relative; top:-1px; width: 300px" type="text" placeholder="Код специальности или название" id="search-text" onkeyup="tableSearch()">
-        <table id="spec-table">
-            <tr> <th width="100px">Код специальности</th> <th width="900x">Название специальности</th></tr>
-            <?php
-            while($spec=mysqli_fetch_assoc($result)){ ?>
-                <tr> <td width="200px"><?= $spec['specialty_code']?></td> <td width="900px"><?= $spec['specialty_name']?></td></tr>
+        <form action="../../vendor/add_edu.php" method="post">
+
+            <label for="doc_id">Номер документа об образовании *</label>
+            <input  type="text" placeholder="Введите номер документа" name="doc_id" id="doc_id" autocomplete="off" required>
+
+            <label for="doc_type">Тип документа об образовании *</label>
+            <select id="doc_type" name="doc_type" required>
+                        <option value='свидетельство об общем базовом образовании'>свидетельство об общем базовом образовании</option>
+                        <option value='аттестат об общем среднем образовании'>аттестат об общем среднем образовании</option>
+                        <option value='диплом о профессионально-техническом образовании'>диплом о профессионально-техническом образовании</option>
+                        <option value='диплом о среднем специальном образовании'>диплом о среднем специальном образовании</option>
+                        <option value='диплом о высшем образовании'>диплом о высшем образовании</option>
+                        <option value='диплом магистра'>диплом магистра</option>
+                        <option value='диплом исследователя'>диплом исследователя</option>
+                        <option value='диплом о переподготовке на уровне среднего специального образования'>диплом о переподготовке на уровне среднего специального образования</option>
+                        <option value='диплом о переподготовке на уровне высшего образования'>диплом о переподготовке на уровне высшего образования</option>
+                        <option value='свидетельство о повышении квалификации'>свидетельство о повышении квалификации</option>
+            </select>
+            <label for="grad_year">Год выпуска *</label>
+            <input type="number" min="1940" max="2099" step="1" id="grad_year" name="grad_year">
+            <label for="spec_code">Код специальности *</label>
+            <select id="spec_code" name="spec_code" required>
                 <?php
-            }
-            ?>
-        </table>
+                while($code=mysqli_fetch_assoc($specialty)){ ?>
+                        <option value='<?=$code["specialty_code"];?>'><?=$code["specialty_code"].' '.$code["specialty_name"];?></option>
+                <?php } ?>
+            </select>
+            <input id="id" name="id" value="<?=$worker_id?>" hidden>
+
+            <button style="margin-top: 25px" class="button" type="submit">Добавить</button>
+        </form>
     </section>
     <footer>
         <p style="text-align: center; padding-top: 15px ">СиБД. Романюк Максим. 2020</p>
     </footer>
 </div>
-<script>function tableSearch() {
-        var phrase = document.getElementById('search-text');
-        var table = document.getElementById('spec-table');
-        var regPhrase = new RegExp(phrase.value, 'i');
-        var flag = false;
-        for (var i = 1; i < table.rows.length; i++) {
-            flag = false;
-            for (var j = 0; j <= table.rows[i].cells.length - 1; j++) {
-                flag = regPhrase.test(table.rows[i].cells[j].innerHTML);
-                if (flag) break;
-            }
-            if (flag) {
-                table.rows[i].style.display = "";
-            } else {
-                table.rows[i].style.display = "none";
-            }
-
-        }
-    }</script>
 </body>
 </html>

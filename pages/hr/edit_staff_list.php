@@ -4,7 +4,9 @@ header("Content-Type:text/html;charset=UTF-8");
 require_once '../../vendor/connect.php';
 include '../../vendor/db_print.php';
 $id=$_GET['id'];
-$dep_info = mysqli_fetch_assoc(mysqli_query($connect,"SELECT * FROM department where department_id='$id'"));
+$staff_list_info = mysqli_fetch_assoc(mysqli_query($connect,"SELECT * FROM  staff_list inner join position using (position_id) inner join department using (department_id) where staff_list_id='$id'"));
+$position = mysqli_query($connect, "SELECT * FROM position");
+$department = mysqli_query($connect, "SELECT * FROM department");
 ?>
 <!DOCTYPE HTML>
 <html lang="ru">
@@ -24,6 +26,7 @@ $dep_info = mysqli_fetch_assoc(mysqli_query($connect,"SELECT * FROM department w
                     <ul>
                         <li><a href="#">Список работников</a></li>
                         <li><a href="#">Добавить работника</a></li>
+
                     </ul>
                 </li>
                 <li><a href="#"><i class="fa fa-"></i>Отчеты</a>
@@ -65,19 +68,45 @@ $dep_info = mysqli_fetch_assoc(mysqli_query($connect,"SELECT * FROM department w
         </nav>
     </header>
     <section class="main-content">
-        <h1 style="margin-bottom: 20px;" >Редактирование отдела</h1>
-        <form action="../../vendor/edit_dep.php" method="post">
-            <label for="dep_id">ID должности (нельзя изменять)</label>
-            <input   type="text" name="dep_id" id="dep_id" autocomplete="off" required value="<?=$id?>" readonly>
-            <label for="dep_name">Название отдела *</label>
-            <input  type="text" placeholder="Введите название отдела" name="dep_name" id="dep_name" autocomplete="off" value="<?=$dep_info["department_name"]?>" required>
+        <h1 style="margin-bottom: 20px;" >Редактирование шататного расписания</h1>
+        <form action="../../vendor/edit_staff_list.php" method="post">
+            <label for="s_l_id">ID должности (нельзя изменять)</label>
+            <input   type="text" name="s_l_id" id="s_l_id" autocomplete="off" required value="<?=$id?>" readonly>
+            <label for="pos_id">Название должности *</label>
+            <select id="pos_id" name="pos_id" required>
+                <?php
+                while($pos=mysqli_fetch_assoc($position)){ ?>
+                    <?php if($pos["position_name"]!=$staff_list_info["position_name"]): ?>
+                        <option value='<?=$pos["position_id"];?>'><?=$pos["position_name"];?></option>
+                    <?php else: ?>
+                        <option selected value='<?=$pos["position_id"];?>'><?=$pos["position_name"];?></option>
+                    <?php endif;} ?>
+            </select>
+            <label for="dep_id">Название отдела *</label>
+            <select id="dep_id" name="dep_id" required>
+                <?php
+                while($dep=mysqli_fetch_assoc($department)){ ?>
+                    <?php if($dep["department_name"]!=$staff_list_info["department_name"]): ?>
+                        <option value='<?=$dep["department_id"];?>'><?=$dep["department_name"];?></option>
+                    <?php else: ?>
+                        <option selected value='<?=$dep["department_id"];?>'><?=$dep["department_name"];?></option>
+                    <?php endif;} ?>
+            </select>
+            <label for="n_staff_units">Количество ставок *</label>
+            <input  type="text" placeholder="Введите количество ставок" name="n_staff_units" id="n_staff_units" autocomplete="off" value="<?=$staff_list_info["number_of_staff_units"]?>" required>
+            <label for="salary">Зарплата *</label>
+            <input  type="text" placeholder="Введите размер зарплаты" name="salary" id="salary" autocomplete="off" value="<?=$staff_list_info["salary"]?>" required>
+            <label for="bonus">Премия *</label>
+            <input  type="text" placeholder="Введите размер премии" name="bonus" id="bonus" autocomplete="off" value="<?=$staff_list_info["bonus"]?>" required>
+
+
 
             <button style="margin-top: 25px" class="button" type="submit">Сохранить</button>
 
         </form>
-        <form action="../../vendor/delete_dep.php" method="post">
-            <input hidden required value="<?=$id?>" name="dep_id_del" id="dep_id_del">
-            <button style="margin-top: 25px; background: #bc524c" class="button" type="submit" onclick="return del();">Удалить отдел</button>
+        <form action="../../vendor/delete_staff_list.php" method="post">
+            <input hidden required value="<?=$id?>" name="s_l_id_del" id="s_l_id_del">
+            <button style="margin-top: 25px; background: #bc524c" class="button" type="submit" onclick="return del();">Удалить должность</button>
             <?php
             if ($_SESSION['upd_msg']) {
                 echo '<p class="msg"> ' . $_SESSION['upd_msg'] . ' </p>';
