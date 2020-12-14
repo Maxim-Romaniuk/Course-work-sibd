@@ -31,42 +31,42 @@ $result = mysqli_query($connect,$query);
                 <li><a href="#"><i class="fa fa-"></i>Работники</a>
                     <ul>
                         <li><a href="#">Список работников</a></li>
-                        <li><a href="#">Добавить работника</a></li>
+                        <li><a href="pages/hr/add_worker_profile.php">Добавить работника</a></li>
                     </ul>
                 </li>
                 <li><a href="#"><i class="fa fa-"></i>Отчеты</a>
                     <ul>
-                        <li><a href="#">Работники отдела</a></li>
-                        <li><a href="#">Все действующие сотрудники</a></li>
-                        <li><a href="#">Работающие пенсионеры</a></li>
+                        <li><a href="pages/hr/dep_workers.php">Работники отдела</a></li>
+                        <li><a href="pages/hr/all_workers_print.php">Все действующие сотрудники</a></li>
+                        <li><a href="pages/hr/pensioners_list_print.php">Работающие пенсионеры</a></li>
                     </ul>
                 </li>
                 <li><a href="#"><i class="fa fa-"></i>Другое</a>
                     <ul>
-                        <li><a href="#">Список спецальностей</a></li>
-                        <li><a href="#">Штатное расписание</a>
+                        <li><a href="pages/hr/specialty_list.php">Список спецальностей</a></li>
+                        <li><a href="pages/hr/staff_list_list.php">Штатное расписание</a>
                             <ul>
-                                <li><a href="#">Просмотреть</a></li>
-                                <li><a href="#">Добавить запись</a></li>
+                                <li><a href="pages/hr/staff_list_list.php">Просмотреть</a></li>
+                                <li><a href="pages/hr/add_staff_list.php">Добавить запись</a></li>
                             </ul>
                         </li>
                         <li><a href="#">Должности и отделы</a>
                             <ul>
-                                <li><a href="#">Список должностей</a></li>
-                                <li><a href="#">Добавить должность</a></li>
-                                <li><a href="#">Список отделов</a></li>
-                                <li><a href="#">Добавить отдел</a></li>
+                                <li><a href="pages/hr/position_list.php">Список должностей</a></li>
+                                <li><a href="pages/hr/add_position.php">Добавить должность</a></li>
+                                <li><a href="pages/hr/department_list.php">Список отделов</a></li>
+                                <li><a href="pages/hr/add_department.php">Добавить отдел</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Список инвалидов</a></li>
-                        <li><a href="#">Список военнообязанных</a></li>
-                        <li><a href="#">Список работающих пенсионеров</a></li>
+                        <li><a href="pages/hr/disability_list.php">Список инвалидов</a></li>
+                        <li><a href="pages/hr/military_list.php">Список военнообязанных</a></li>
+                        <li><a href="pages/hr/pensioners_list.php">Список работающих пенсионеров</a></li>
                     </ul>
                 </li>
 
                 <li><a href="#"><i class="fa fa-"></i>Профиль</a>
                     <ul>
-                        <li><a href="../vendor/logout.php" class="logout">Выход</a></li>
+                        <li><a href="vendor/logout.php" class="logout">Выход</a></li>
                     </ul>
                 </li>
             </ul>
