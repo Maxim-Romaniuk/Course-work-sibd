@@ -10,7 +10,7 @@ $spec_info = mysqli_fetch_assoc(mysqli_query($connect,"SELECT * FROM specialty w
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Профиль</title>
+    <title>Редактирование специальности</title>
     <link rel="stylesheet" href="../../assets/css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>

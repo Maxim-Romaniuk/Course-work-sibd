@@ -8,7 +8,7 @@ include '../../vendor/db_print.php';
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Профиль</title>
+    <title>Добавление работника</title>
     <link rel="stylesheet" href="../../assets/css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
@@ -17,40 +17,40 @@ include '../../vendor/db_print.php';
     <header>
         <nav class="dws-menu">
             <ul>
-                <li><a href="#"><i class="fa fa-"></i>Главная</a></li>
-                <li><a href="#"><i class="fa fa-"></i>Работники</a>
+                <li><a href="../../profile.php"><i class="fa fa-"></i>Главная</a></li>
+                <li><a href="../../profile.php"><i class="fa fa-"></i>Работники</a>
                     <ul>
-                        <li><a href="#">Список работников</a></li>
-                        <li><a href="#">Добавить работника</a></li>
+                        <li><a href="../../profile.php">Список работников</a></li>
+                        <li><a href="add_worker_profile.php">Добавить работника</a></li>
                     </ul>
                 </li>
                 <li><a href="#"><i class="fa fa-"></i>Отчеты</a>
                     <ul>
-                        <li><a href="#">Работники отдела</a></li>
-                        <li><a href="#">Все действующие сотрудники</a></li>
-                        <li><a href="#">Работающие пенсионеры</a></li>
+                        <li><a href="dep_workers.php">Работники отдела</a></li>
+                        <li><a href="all_workers_print.php">Все действующие сотрудники</a></li>
+                        <li><a href="pensioners_list_print.php">Работающие пенсионеры</a></li>
                     </ul>
                 </li>
                 <li><a href="#"><i class="fa fa-"></i>Другое</a>
                     <ul>
-                        <li><a href="#">Список спецальностей</a></li>
-                        <li><a href="#">Штатное расписание</a>
+                        <li><a href="specialty_list.php">Список спецальностей</a></li>
+                        <li><a href="staff_list_list.php">Штатное расписание</a>
                             <ul>
-                                <li><a href="#">Просмотреть</a></li>
-                                <li><a href="#">Добавить запись</a></li>
+                                <li><a href="staff_list_list.php">Просмотреть</a></li>
+                                <li><a href="add_staff_list.php">Добавить запись</a></li>
                             </ul>
                         </li>
                         <li><a href="#">Должности и отделы</a>
                             <ul>
-                                <li><a href="#">Список должностей</a></li>
-                                <li><a href="#">Добавить должность</a></li>
-                                <li><a href="#">Список отделов</a></li>
+                                <li><a href="position_list.php">Список должностей</a></li>
+                                <li><a href="add_position.php">Добавить должность</a></li>
+                                <li><a href="department_list.php">Список отделов</a></li>
                                 <li><a href="#">Добавить отдел</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Список инвалидов</a></li>
-                        <li><a href="#">Список военнообязанных</a></li>
-                        <li><a href="#">Список работающих пенсионеров</a></li>
+                        <li><a href="disability_list.php">Список инвалидов</a></li>
+                        <li><a href="military_list.php">Список военнообязанных</a></li>
+                        <li><a href="pensioners_list.php">Список работающих пенсионеров</a></li>
                     </ul>
                 </li>
 

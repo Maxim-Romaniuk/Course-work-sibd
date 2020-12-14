@@ -14,7 +14,7 @@ $result = mysqli_query($connect,"SELECT specialty_code, specialty_name FROM spec
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Профиль</title>
+    <title>Специальности</title>
     <link rel="stylesheet" href="../../assets/css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>

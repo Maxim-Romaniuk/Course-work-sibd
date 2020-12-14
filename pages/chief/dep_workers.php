@@ -25,36 +25,21 @@ $departments = mysqli_query($connect,"SELECT * FROM  department");
                 <li><a href="../../profile.php"><i class="fa fa-"></i>Работники</a>
                     <ul>
                         <li><a href="../../profile.php">Список работников</a></li>
-                        <li><a href="add_worker_profile.php">Добавить работника</a></li>
                     </ul>
                 </li>
                 <li><a href="#"><i class="fa fa-"></i>Отчеты</a>
                     <ul>
                         <li><a href="#">Работники отдела</a></li>
                         <li><a href="all_workers_print.php">Все действующие сотрудники</a></li>
-                        <li><a href="pensioners_list_print.php">Работающие пенсионеры</a></li>
                     </ul>
                 </li>
                 <li><a href="#"><i class="fa fa-"></i>Другое</a>
                     <ul>
-                        <li><a href="specialty_list.php">Список спецальностей</a></li>
-                        <li><a href="staff_list_list.php">Штатное расписание</a>
-                            <ul>
-                                <li><a href="staff_list_list.php">Просмотреть</a></li>
-                                <li><a href="add_staff_list.php">Добавить запись</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Должности и отделы</a>
-                            <ul>
-                                <li><a href="position_list.php">Список должностей</a></li>
-                                <li><a href="add_position.php">Добавить должность</a></li>
-                                <li><a href="department_list.php">Список отделов</a></li>
-                                <li><a href="add_department.php">Добавить отдел</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="disability_list.php">Список инвалидов</a></li>
-                        <li><a href="military_list.php">Список военнообязанных</a></li>
-                        <li><a href="pensioners_list.php">Список работающих пенсионеров</a></li>
+                        <li><a href="specialty_list.php">Список специальностей</a></li>
+                        <li><a href="staff_list_list.php">Штатное расписание</a></li>
+                        <li><a href="position_list.php">Список должностей</a></li>
+                        <li><a href="department_list.php">Список отделов</a></li>
+
                     </ul>
                 </li>
 
@@ -65,8 +50,7 @@ $departments = mysqli_query($connect,"SELECT * FROM  department");
                 </li>
             </ul>
         </nav>
-    </header>
-    <section class="main-content">
+    </header>      <section class="main-content">
         <h1 style="margin-bottom: 20px;" >Создание отчета со списком работников в отделе</h1>
         <form action="dep_workers_print.php" method="get">
             <label for="id">Выберите отдел *</label>

@@ -9,7 +9,7 @@ $levels = mysqli_query($connect,"SELECT lvl, lvl_name FROM  levels");
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Профиль</title>
+    <title>Добавление пользователя</title>
     <link rel="stylesheet" href="../../assets/css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>

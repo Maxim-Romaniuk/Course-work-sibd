@@ -8,7 +8,7 @@ include '../../vendor/db_print.php';
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Профиль</title>
+    <title>Добавление специальности</title>
     <link rel="stylesheet" href="../../assets/css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
